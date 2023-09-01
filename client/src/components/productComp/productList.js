@@ -81,7 +81,7 @@ export default function ProductList() {
            <th>Action</th>
          </tr>
        </thead>
-       <tbody className="invListStyle">{productList()}</tbody>
+       <tbody className="capitalsList">{productList()}</tbody>
      </table>
    </div>
  );

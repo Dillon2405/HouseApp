@@ -117,7 +117,7 @@ export default function Edit() {
           >
             <option value="">Select a product</option>
             {productList.map(product => (
-              <option key={product.productDesc} value={product.productDesc}>
+              <option className="capitalsList" key={product.productDesc} value={product.productDesc}>
                 {product.productDesc}
               </option>
             ))}

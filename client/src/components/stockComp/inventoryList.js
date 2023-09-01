@@ -110,7 +110,7 @@ export default function InventoryList() {
            <th>Action</th>
          </tr>
        </thead>
-       <tbody className="invListStyle">{inventoryList()}</tbody>
+       <tbody className="capitalsList">{inventoryList()}</tbody>
      </table>
    </div>
  );
