@@ -1,0 +1,39 @@
+/* Body - change background to dark */
+body {
+    background-color: #282c34;
+    color: white;
+    padding: 40px;
+    font-family: Arial;
+    text-align: center;
+  }
+
+  /*crudStyle - style for  */
+  .crudStyle {
+    position: center;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+  }
+
+    /*crudStyle - style for  */
+  .formStyle {
+    display: inline-block;
+    width: 35%;
+    max-width: 40%;
+  }
+
+    /*crudStyle - style for  */
+  .crudCreateStyle {
+    display: inline-block;
+    position: center;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+   width: 25%;
+   max-width: 30%;
+  }
+
+ .invListStyle{
+  text-transform: uppercase;
+}
+
