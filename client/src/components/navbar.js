@@ -28,7 +28,7 @@ export default function Menu() {
             navbarScroll
           >
             <NavLink className="nav-link" to="/create">
-               Create Stock
+               Add Item
              </NavLink>
             <NavDropdown title="Manage Products" id="navbarScrollingDropdown">
               <NavDropdown.Item href="/createProduct">Create New Product</NavDropdown.Item>
@@ -36,7 +36,7 @@ export default function Menu() {
                 Product List
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
+              <NavDropdown.Item href="/categoryList">
                 Product Categories
               </NavDropdown.Item>
             </NavDropdown>
