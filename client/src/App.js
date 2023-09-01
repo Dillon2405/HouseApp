@@ -5,12 +5,12 @@ import { Route, Routes } from "react-router-dom";
 
 //Imports Components
 import Menu from "./components/navbar";
-import InventoryList from "./components/inventoryList";
-import Edit from "./components/edit";
-import Create from "./components/create";
-import ProductList from "./components/productList";
-import CreateProduct from "./components/createProduct";
-import EditProduct from "./components/editProduct";
+import InventoryList from "./components/stockComp/inventoryList";
+import Edit from "./components/stockComp/edit";
+import Create from "./components/stockComp/create";
+import ProductList from "./components/productComp/productList";
+import CreateProduct from "./components/productComp/createProduct";
+import EditProduct from "./components/productComp/editProduct";
 
 const App = () => {
   return (
