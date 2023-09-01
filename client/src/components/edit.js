@@ -6,11 +6,10 @@ import { useParams, useNavigate } from "react-router";
 //Edit Stock Form Function
 export default function Edit() {
  const [form, setForm] = useState({
-   stockDesc: "",
+   productDesc: "",
    stockExp: "",
-   stockCat: "",
+   productCat: "",
    stockQty: "",
-   productId: "",
    stock: [],
  });
  const params = useParams();
@@ -66,6 +65,17 @@ export default function Edit() {
 
  // These methods will update the state properties.
  function updateForm(value) {
+  if (value.productDesc) {
+    // Find the selected product in the productList
+    const selectedProduct = productList.find(
+      (product) => product.productDesc === value.productDesc
+    );
+
+    // Set the productCat based on the selected product
+    if (selectedProduct) {
+      value.productCat = selectedProduct.productCat;
+    }
+  }
    return setForm((prev) => {
      return { ...prev, ...value };
    });
@@ -74,9 +84,9 @@ export default function Edit() {
  async function onSubmit(e) {
    e.preventDefault();
    const editedPerson = {
-     productId: form.productId,
+     productDesc: form.productDesc,
      stockExp: form.stockExp,
-     stockCat: form.stockCat,
+     productCat: form.productCat,
      stockQty: form.stockQty,
    };
 
@@ -98,16 +108,16 @@ export default function Edit() {
      <h3>Update Item</h3>
      <form onSubmit={onSubmit} className="formStyle">
      <div className="form-group">
-          <label htmlFor="productId">Select Product</label>
+          <label htmlFor="productDesc">Select Product</label>
           <select
             className="form-control"
-            id="productId"
-            value={form.productId}
-            onChange={(e) => updateForm({ productId: e.target.value })}
+            id="productDesc"
+            value={form.productDesc}
+            onChange={(e) => updateForm({ productDesc: e.target.value })}
           >
             <option value="">Select a product</option>
             {productList.map(product => (
-              <option key={product._id} value={product._id}>
+              <option key={product.productDesc} value={product.productDesc}>
                 {product.productDesc}
               </option>
             ))}
@@ -133,46 +143,6 @@ export default function Edit() {
            onChange={(e) => updateForm({ stockExp: e.target.value })}
          />
        </div>
-       <div className="form-group">
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="categoryOptions"
-             id="categoryDairy"
-             value="Dairy"
-             checked={form.stockCat === "Dairy"}
-             onChange={(e) => updateForm({ stockCat: e.target.value })}
-           />
-           <label htmlFor="categoryDairy" className="form-check-label">Dairy</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="categoryOptions"
-             id="categoryMeat"
-             value="Meat"
-             checked={form.stockCat === "Meat"}
-             onChange={(e) => updateForm({ stockCat: e.target.value })}
-           />
-           <label htmlFor="categoryMeat" className="form-check-label">Meat</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="categoryOptions"
-             id="categoryVeg"
-             value="Veg"
-             checked={form.stockCat === "Veg"}
-             onChange={(e) => updateForm({ stockCat: e.target.value })}
-           />
-           <label htmlFor="categoryVeg" className="form-check-label">Veg</label>
-         </div>
-       </div>
-       <br />
-
        <div className="form-group">
          <input
            type="submit"
