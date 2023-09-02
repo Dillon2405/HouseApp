@@ -4,6 +4,7 @@ import cors from "cors";
 import "./loadEnvironment.mjs";
 import inventory from "./routes/stockDB.mjs";
 import prodInv from "./routes/productDB.mjs"
+import catInv from "./routes/categoryDB.mjs"
 
 //Express setup
 const PORT = 5050;
@@ -16,6 +17,7 @@ app.use(express.json());
 //Pull from DB
 app.use("/stockDB", inventory);
 app.use("/productDB", prodInv);
+app.use("/categoryDB", catInv);
 
 
 // start the Express server
