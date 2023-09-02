@@ -79,7 +79,7 @@ export default function Create() {
  // This following section will display the form that takes the input from the user.
  return (
    <div className="crudCreateStyle">
-     <h3>Create New Stock</h3>
+     <h3>Add Items</h3>
      <form onSubmit={onSubmit} className="formStyle">
        <div className="form-group">
           <label htmlFor="productDesc">Select Product</label>

@@ -39,6 +39,9 @@ export default function Menu() {
               <NavDropdown.Item href="/categoryList">
                 Product Categories
               </NavDropdown.Item>
+              <NavDropdown.Item href="/createCategory">
+                Create Categories
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Form className="d-flex">

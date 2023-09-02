@@ -5,9 +5,9 @@ import { useParams, useNavigate } from "react-router";
 
 //Edit Stock Form Function
 export default function EditCategory() {
- const [prodForm, setCategoryForm] = useState({
+ const [categoryForm, setCategoryForm] = useState({
    categoryDesc: "",
-   categories: [],
+   category: [],
  });
  const params = useParams();
  const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function EditCategory() {
  async function onSubmit(e) {
    e.preventDefault();
    const editedCategory = {
-     categoryDesc: prodForm.categoryDesc,
+     categoryDesc: categoryForm.categoryDesc,
    };
 
    // This will send a post request to update the data in the database.
@@ -73,7 +73,7 @@ export default function EditCategory() {
            type="text"
            className="form-control"
            id="categoryDesc"
-           value={prodForm.categoryDesc}
+           value={categoryForm.categoryDesc}
            onChange={(e) => updateCategoryForm({ categoryDesc: e.target.value })}
          />
        </div>         

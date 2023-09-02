@@ -8,7 +8,7 @@ const CategoryItem = (props) => (
  <tr>
    <td>{props.category.categoryDesc}</td>
    <td>
-     <Link className="btn btn-link" to={`/editProduct/${props.category._id}`}>Edit</Link> |
+     <Link className="btn btn-link" to={`/editCategory/${props.category._id}`}>Edit</Link> |
      <button className="btn btn-link"
        onClick={() => {
          props.deleteCategory(props.category._id);
@@ -21,11 +21,11 @@ const CategoryItem = (props) => (
 );
 
 
-//CategoryList function to pull categories list from DB
+//CategoryList function to pull catInv list from DB
 export default function CategoryList() {
- const [categories, setCategory] = useState([]);
+ const [catInv, setCategory] = useState([]);
 
- // This method fetches the categories from the database.
+ // This method fetches the catInv from the database.
  useEffect(() => {
    async function getCategory() {
      const response = await fetch(`http://localhost:5050/categoryDB/categoryList`);
@@ -36,14 +36,14 @@ export default function CategoryList() {
        return;
      }
 
-     const categories = await response.json();
-     setCategory(categories);
+     const catInv = await response.json();
+     setCategory(catInv);
    }
 
    getCategory();
 
    return;
- }, [categories.length]);
+ }, [catInv.length]);
 
  // This method will delete a category
  async function deleteCategory(id) {
@@ -51,13 +51,13 @@ export default function CategoryList() {
      method: "DELETE"
    });
 
-   const newCategory = categories.filter((el) => el._id !== id);
+   const newCategory = catInv.filter((el) => el._id !== id);
    setCategory(newCategory);
  }
 
  // This method will map out the category on the table
  function categoryList() {
-   return categories.map((category) => {
+   return catInv.map((category) => {
      return (
        <CategoryItem
          category={category}
@@ -68,7 +68,7 @@ export default function CategoryList() {
    });
  }
 
- // This following section will display the table with the categories of category.
+ // This following section will display the table with the catInv of category.
  return (
    <div className="crudStyle">
      <h3>Category List</h3>
