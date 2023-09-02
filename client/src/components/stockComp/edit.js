@@ -8,16 +8,38 @@ export default function Edit() {
  const [form, setForm] = useState({
    productDesc: "",
    stockExp: "",
-   productCat: "",
+   categoryDesc: "",
    stockQty: "",
    stock: [],
  });
  const params = useParams();
  const navigate = useNavigate();
 
- //Fetch products from DB
+ //Define products & categories to be pulled from DB
  const [productList, setProductList] = useState([]);
+ const [, setCategoryList] = useState([]);
 
+//Fetch categories from database
+ useEffect(() => {
+   async function fetchCategoryList() {
+     try {
+       const response = await fetch("http://localhost:5050/categoryDB/categoryList");
+ 
+       if (response.ok) {
+         const categories = await response.json();
+         setCategoryList(categories);
+       } else {
+         console.error("Failed to fetch product list");
+       }
+     } catch (error) {
+       console.error("An error occurred while fetching product list:", error);
+     }
+   }
+ 
+   fetchCategoryList();
+ }, []);
+
+ //Fetch products from database
  useEffect(() => {
    async function fetchProductList() {
      try {
@@ -71,9 +93,9 @@ export default function Edit() {
       (product) => product.productDesc === value.productDesc
     );
 
-    // Set the productCat based on the selected product
+    // Set the categoryDesc based on the selected product
     if (selectedProduct) {
-      value.productCat = selectedProduct.productCat;
+      value.categoryDesc = selectedProduct.categoryDesc;
     }
   }
    return setForm((prev) => {
@@ -86,7 +108,7 @@ export default function Edit() {
    const editedPerson = {
      productDesc: form.productDesc,
      stockExp: form.stockExp,
-     productCat: form.productCat,
+     categoryDesc: form.categoryDesc,
      stockQty: form.stockQty,
    };
 

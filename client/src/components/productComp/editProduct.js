@@ -7,11 +7,33 @@ import { useParams, useNavigate } from "react-router";
 export default function EditProduct() {
  const [prodForm, setProdForm] = useState({
    productDesc: "",
-   productCat: "",
+   categoryDesc: "",
    product: [],
  });
  const params = useParams();
  const navigate = useNavigate();
+
+ const [categoryList, setCategoryList] = useState([]);
+
+
+ useEffect(() => {
+   async function fetchCategoryList() {
+     try {
+       const response = await fetch("http://localhost:5050/categoryDB/categoryList");
+ 
+       if (response.ok) {
+         const categories = await response.json();
+         setCategoryList(categories);
+       } else {
+         console.error("Failed to fetch product list");
+       }
+     } catch (error) {
+       console.error("An error occurred while fetching product list:", error);
+     }
+   }
+ 
+   fetchCategoryList();
+ }, []);
 
 //Retrieves InventoryItem from DB or return err
  useEffect(() => {
@@ -49,7 +71,7 @@ export default function EditProduct() {
    e.preventDefault();
    const editedProduct = {
      productDesc: prodForm.productDesc,
-     productCat: prodForm.productCat,
+     categoryDesc: prodForm.categoryDesc,
    };
 
    // This will send a post request to update the data in the database.
@@ -80,45 +102,21 @@ export default function EditProduct() {
          />
        </div>         
        <div className="form-group">
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="prodCatOptions"
-             id="prodCatDairy"
-             value="Dairy"
-             checked={prodForm.productCat === "Dairy"}
-             onChange={(e) => updateProdForm({ productCat: e.target.value })}
-           />
-           <label htmlFor="categoryDairy" className="form-check-label">Dairy</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="prodCatOptions"
-             id="prodCatMeat"
-             value="Meat"
-             checked={prodForm.productCat === "Meat"}
-             onChange={(e) => updateProdForm({ productCat: e.target.value })}
-           />
-           <label htmlFor="prodCatDairy" className="form-check-label">Meat</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="prodCatOptions"
-             id="prodCatVeg"
-             value="Veg"
-             checked={prodForm.productCat === "Veg"}
-             onChange={(e) => updateProdForm({ productCat: e.target.value })}
-           />
-           <label htmlFor="prodCatVeg" className="form-check-label">Veg</label>
-         </div>
-       </div>
-       <br />
-
+          <label htmlFor="categoryDesc">Select Category</label>
+          <select
+            className="form-control"
+            id="categoryDesc"
+            value={prodForm.categoryDesc}
+            onChange={(e) => updateProdForm({ categoryDesc: e.target.value })}
+          >
+            <option value="">Select a Category</option>
+            {categoryList.map(category => (
+              <option className="capitalsList"key={category.categoryDesc} value={category.categoryDesc}>
+                {category.categoryDesc}
+              </option>
+            ))}
+          </select>
+        </div> 
        <div className="form-group">
          <input
            type="submit"
