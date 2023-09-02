@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const ProductItem = (props) => (
  <tr>
    <td>{props.product.productDesc}</td>
-   <td>{props.product.productCat}</td>
+   <td>{props.product.categoryDesc}</td>
    <td>
      <Link className="btn btn-link" to={`/editProduct/${props.product._id}`}>Edit</Link> |
      <button className="btn btn-link"
@@ -25,6 +25,27 @@ const ProductItem = (props) => (
 //ProductList function to pull prodInv list from DB
 export default function ProductList() {
  const [prodInv, setProduct] = useState([]);
+ const [catInv, setCategory] = useState([]);
+
+ //Prod INV DB
+ useEffect(() => {
+  async function getCategory() {
+    const response = await fetch(`http://localhost:5050/categoryDB/categoryList`);
+
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+
+    const catInv = await response.json();
+    setCategory(catInv);
+  }
+
+  getCategory();
+
+  return;
+}, [catInv.length]);
 
  // This method fetches the prodInv from the database.
  useEffect(() => {

@@ -1,5 +1,5 @@
 //Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import { useNavigate } from "react-router"; (1)
 
 
@@ -7,9 +7,33 @@ import React, { useState } from "react";
 export default function CreateProduct() {
  const [prodForm, setForm] = useState({
    productDesc: "",
-   productCat: "",
+   categoryDesc: "",
  });
  //const navigate = useNavigate(); (1)
+
+//Fetch category from DB
+const [categoryList, setCategoryList] = useState([]);
+
+
+useEffect(() => {
+  async function fetchCategoryList() {
+    try {
+      const response = await fetch("http://localhost:5050/categoryDB/categoryList");
+
+      if (response.ok) {
+        const categories = await response.json();
+        setCategoryList(categories);
+      } else {
+        console.error("Failed to fetch product list");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching product list:", error);
+    }
+  }
+
+  fetchCategoryList();
+}, []);
+
 
  // These methods will update the state properties.
  function updateForm(value) {
@@ -36,7 +60,7 @@ export default function CreateProduct() {
      window.alert(error);
      return;
    });
-   setForm({ productDesc: "", productCat: ""});
+   setForm({ productDesc: "", categoryDesc: ""});
 
 // navigate("/"); (1)
   }
@@ -56,49 +80,26 @@ export default function CreateProduct() {
            onChange={(e) => updateForm({ productDesc: e.target.value })}
          />
        </div>    
-       <label>Product Category</label>
        <div className="form-group">
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="prodCatOptions"
-             id="prodCatDairy"
-             value="Dairy"
-             checked={prodForm.productCat === "Dairy"}
-             onChange={(e) => updateForm({ productCat: e.target.value })}
-           />
-           <label htmlFor="prodCatDairy" className="form-check-label">Dairy</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="prodCatOptions"
-             id="prodCatMeat"
-             value="Meat"
-             checked={prodForm.productCat === "Meat"}
-             onChange={(e) => updateForm({ productCat: e.target.value })}
-           />
-           <label htmlFor="prodCatMeat" className="form-check-label">Meat</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="prodCatOptions"
-             id="prodCatVeg"
-             value="Veg"
-             checked={prodForm.productCat === "Veg"}
-             onChange={(e) => updateForm({ productCat: e.target.value })}
-           />
-           <label htmlFor="prodCatVeg" className="form-check-label">Veg</label>
-         </div>
-       </div>
-       <div className="form-group">
+          <label htmlFor="categoryDesc">Select Category</label>
+          <select
+            className="form-control"
+            id="categoryDesc"
+            value={prodForm.categoryDesc}
+            onChange={(e) => updateForm({ categoryDesc: e.target.value })}
+          >
+            <option value="">Select a Category</option>
+            {categoryList.map(category => (
+              <option className="capitalsList"key={category.categoryDesc} value={category.categoryDesc}>
+                {category.categoryDesc}
+              </option>
+            ))}
+          </select>
+        </div> 
+        <div className="form-group">
          <input
            type="submit"
-           value="Add stock"
+           value="Add Product"
            className="btn btn-primary"
          />
        </div>

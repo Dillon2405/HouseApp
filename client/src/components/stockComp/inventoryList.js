@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const InventoryItem = (props) => (
  <tr>
    <td>{props.stock.productDesc}</td>
-   <td>{props.stock.productCat}</td>
+   <td>{props.stock.categoryDesc}</td>
    <td>{props.stock.stockQty}</td>
    <td>{props.stock.stockExp}</td>
    <td>

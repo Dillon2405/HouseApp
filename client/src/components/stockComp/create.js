@@ -8,7 +8,7 @@ export default function Create() {
  const [form, setForm] = useState({
    productDesc: "",
    stockExp: "",
-   productCat: "",
+   categoryDesc: "",
    stockQty: "",
  });
  //const navigate = useNavigate(); (1)
@@ -44,9 +44,9 @@ export default function Create() {
       (product) => product.productDesc === value.productDesc
     );
 
-    // Set the productCat based on the selected product
+    // Set the categoryDesc based on the selected product
     if (selectedProduct) {
-      value.productCat = selectedProduct.productCat;
+      value.categoryDesc = selectedProduct.categoryDesc;
     }
   }
    return setForm((prev) => {
@@ -72,7 +72,7 @@ export default function Create() {
      window.alert(error);
      return;
    });
-   setForm({ productDesc: "", stockExp: "", productCat: "", stockQty: ""});
+   setForm({ productDesc: "", stockExp: "", categoryDesc: "", stockQty: ""});
 // navigate("/"); (1)
   }
 

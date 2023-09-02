@@ -27,7 +27,7 @@ router.get("/productList/:id", async (req, res) => {
 router.post("/productList", async (req, res) => {
   let newProduct = {
     productDesc: req.body.productDesc,
-    productCat: req.body.productCat,
+    categoryDesc: req.body.categoryDesc,
   };
   let collection = await db.collection("Products");
   let result = await collection.insertOne(newProduct);
@@ -40,7 +40,7 @@ router.patch("/productList/:id", async (req, res) => {
   const updates =  {
     $set: {
       productDesc: req.body.productDesc,
-      productCat: req.body.productCat,
+      categoryDesc: req.body.categoryDesc,
     }
   };
 

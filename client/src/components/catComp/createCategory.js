@@ -58,7 +58,7 @@ export default function CreateCategory() {
        <div className="form-group">
          <input
            type="submit"
-           value="Add stock"
+           value="Add Category"
            className="btn btn-primary"
          />
        </div>

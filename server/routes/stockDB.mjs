@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
   let newDocument = {
     productDesc: req.body.productDesc,
     stockExp: req.body.stockExp,
-    productCat: req.body.productCat,
+    categoryDesc: req.body.categoryDesc,
     stockQty: req.body.stockQty,
   };
   let collection = await db.collection("Stock");
@@ -43,7 +43,7 @@ router.patch("/:id", async (req, res) => {
     $set: {
       productDesc: req.body.productDesc,
       stockExp: req.body.stockExp,
-      productCat: req.body.productCat,
+      categoryDesc: req.body.categoryDesc,
       stockQty: req.body.stockQty
     }
   };

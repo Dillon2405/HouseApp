@@ -36,11 +36,11 @@ export default function Menu() {
                 Product List
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/categoryList">
-                Product Categories
-              </NavDropdown.Item>
               <NavDropdown.Item href="/createCategory">
-                Create Categories
+                Create New Category
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/categoryList">
+                Category List
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
